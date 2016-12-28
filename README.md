@@ -1,4 +1,4 @@
-Absolute minimal Raspberry Pi GPU example: 0xdeadbeef
+Absolute Minimal Raspberry Pi GPU Example: 0xdeadbeef
 ====
 
 This repository serves as a starting point for writing GPU code for the Raspberry Pi.
@@ -109,9 +109,9 @@ As a syntactic sugar, `vc4asm` provides a semantically equivalent pseudo-instruc
 
     read vw_wait
 
-Note: Writing to vpm will increment the write position by `Stride`, in our case to the next row.
+Note: Writing to `vpm` will increment the write position by `Stride`, in our case to the next row.
 If `vpm` is written to again without modifying `vw_setup`, it is considered part of the same
-write and it is not necessary to stall on `vw_wait` until all `mov vpm` instructions have been issued.
+write and it is not necessary to stall on `vw_wait` until all mov instructions have been issued.
 
     mov vw_setup, 0x00001b00
     mov vpm, 0xdeadbeef
@@ -151,7 +151,7 @@ In our case, we want to write out the top 16-byte row, thus we set `Units` to `1
 
 Finally, we need a memory address to write to.
 The uniform register can be used to pass a vector of values from the
-outsider world to the QPU's. More on this later, but for now it
+outside world to the QPU's. More on this later, but for now it
 suffices that we can read an address from the special register `unif`.
 
     .set out_addr, r0
@@ -224,7 +224,7 @@ Assembling
 
 `vc4asm` is available from http://maazl.de/project/vc4asm/doc/index.html.
 We will assemble and output the instructions as an array of uint32_t
-values which can be `#include`'d, or even copy pasted, into a C code.
+values which can be `#include`'d, or even copy pasted, into C code.
 
 The included binaries run on the raspberry pi, or alternatively can be recompiled for
 another architecture and run there.
